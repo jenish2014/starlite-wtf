@@ -43,12 +43,12 @@
     # receive file in MULTIPART encoded POST data
     @post(http_method=['GET', 'POST'])
     async def populate_from_post(request: Request) -> Template:
+        form = await FileForm.create(request)
         if request.method == 'POST'
-            form = await FileForm.create(request)
             file_data = await form.doc.data.read()
             assert form.doc.data.filename == 'starlite.txt'
             assert file_data == "b'This is a starlite test file'"
             return Template(name='success.html', context={'form': form})
-         
+        
         return Template(name="basic_form.html", context={'form': form})
 ```
