@@ -1,5 +1,4 @@
 import json
-from dataclasses import dataclass
 from io import BytesIO
 
 from starlite import create_test_client, get, MediaType, Request, Response, post
@@ -115,13 +114,7 @@ def test_populate_form_using_query_parameters(BasicForm):
         assert response_data['active'] is False
 
 
-def test_populate_form_using_object(BasicForm):
-    @dataclass
-    class User:
-        firstname: str
-        lastname: str
-        active: bool
-
+def test_populate_form_using_object(BasicForm, User):
     @post()
     async def populate_from_obj(request: Request) -> Response:
         user_obj = User(firstname='Jon', lastname='Doe', active=True)
@@ -143,13 +136,7 @@ def test_populate_form_using_object(BasicForm):
         assert form_data['active'] is False
 
 
-def test_update_object_using_form_data(BasicForm):
-    @dataclass
-    class User:
-        firstname: str
-        lastname: str
-        active: bool
-
+def test_update_object_using_form_data(BasicForm, User):
     @post()
     async def update_obj(request: Request) -> Response:
         user_object = User(firstname='Jon', lastname='Doe', active=True)

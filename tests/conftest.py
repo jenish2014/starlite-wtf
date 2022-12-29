@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 import pytest
 from wtforms import StringField, FileField, BooleanField
 from wtforms.validators import Length, DataRequired
@@ -30,3 +32,14 @@ def FileForm():
         doc = FileField(label='Test Document')
 
     return FileForm
+
+
+@pytest.fixture
+def User():
+    @dataclass
+    class User:
+        firstname: str
+        lastname: str
+        active: bool
+
+    return User

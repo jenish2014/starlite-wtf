@@ -1,10 +1,9 @@
 import asyncio
 
-from starlite import Request, FormMultiDict
-from starlite.datastructures import MultiDict
+from starlite import Request
 from wtforms import Form, ValidationError
 
-from .util import get_formdata, patch_FormMultiDict
+from .util import get_formdata
 
 SUBMIT_METHODS = {'POST', 'PUT', 'PATCH', 'DELETE'}
 

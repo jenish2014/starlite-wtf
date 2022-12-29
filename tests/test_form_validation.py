@@ -1,5 +1,4 @@
-from starlite import get, MediaType, create_test_client, Request, Response, route, post, \
-    FormMultiDict
+from starlite import get, MediaType, create_test_client, Request, Response, route, post
 from starlite.status_codes import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_201_CREATED
 
 
