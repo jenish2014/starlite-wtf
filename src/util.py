@@ -1,6 +1,6 @@
 import json
 import types
-from typing import List, TypeVar
+from typing import List, TypeVar, Any
 
 from starlite import FormMultiDict
 from starlite.datastructures import MultiDict
@@ -22,7 +22,10 @@ def patch_FormMultiDict(formdata):
     return formdata
 
 
-async def get_formdata(request):
+async def get_formdata(request=None, data: dict[str, Any] = None):
+    if request is None and data is not None:
+        return patch_FormMultiDict(FormMultiDict(data))
+
     if request.content_type[0] == 'application/json':
         # in some instances request.json() returns string instead of dict
         # this checks for string and returns MultiDict out of it.

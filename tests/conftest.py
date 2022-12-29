@@ -16,12 +16,12 @@ def BasicForm():
 
 
 @pytest.fixture
-def ValidationForm():
-    class ValidationForm(StarliteForm):
-        firstname = StringField(validators=[Length(min=3, max=8)])
+def ValidateForm():
+    class ValidateForm(StarliteForm):
+        firstname = StringField(validators=[Length(min=4, max=8)])
         lastname = StringField(validators=[DataRequired()])
 
-    return ValidationForm
+    return ValidateForm
 
 
 @pytest.fixture
