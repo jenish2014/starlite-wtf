@@ -24,6 +24,10 @@ class StarliteForm(Form):
 
         return cls(request, **kwargs)
 
+    async def populate(self, request):
+        formdata = await get_formdata(request=request)
+        self.process(formdata=formdata)
+
     def is_submitted(self):
         """Consider the form submitted if there is an active request and
         the method is ``POST``, ``PUT``, ``PATCH``, or ``DELETE``.

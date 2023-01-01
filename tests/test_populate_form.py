@@ -73,12 +73,11 @@ def test_populate_form_after_init(BasicForm):
     @post()
     async def populate_after_init(request: Request) -> Response:
         form = BasicForm(request)
+
         response_data = dict()
         response_data['empty_form'] = form.data
 
-        from src.util import get_formdata
-        formdata = await get_formdata(request=request)
-        form.process(formdata=formdata)
+        await form.populate(request)
         response_data['populated_form'] = form.data
 
         return Response(content=response_data)
